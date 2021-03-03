@@ -1,10 +1,16 @@
 import React, {
     Component
 } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
+
+    // notify = (message) => toast(message);
 
     state = {
         shirts: [],
@@ -18,6 +24,7 @@ class ProductProvider extends Component {
         // .then(shirtsData => {
         //     this.setState({ shirts: shirtsData });
         // });
+        
         fetch('https://www.prolicing.tech/get-shirts-data')
         .then((response) => response.json())
         .then(shirtsData => {
@@ -90,9 +97,8 @@ class ProductProvider extends Component {
                 this.setState(() => {
                     return {shirts: tempProduct, cart: [...this.state.cart, product]};
                 }, () => {
-                    console.log("Cart restored from localstorage:");
-                    //alert("Cart restored");
-                    console.log(this.state);
+                    toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+                    //console.log(this.state);
                 })
             }
         }
@@ -100,7 +106,7 @@ class ProductProvider extends Component {
 
     addToCart = (id, size) => {
         if(!size) size = 32;
-        console.log("Shirt of id "+id+" added to cart.");
+        // console.log("Shirt of id "+id+" added to cart.");
         //alert("Shirt of size "+size+" added to cart.");
         
 
@@ -116,7 +122,8 @@ class ProductProvider extends Component {
         this.setState(() => {
             return {shirts: tempProduct, cart: [...this.state.cart, product]};
         }, () => {
-            console.log(this.state);
+            //console.log(this.state);
+            toast.success("Added to cart!", { position: toast.POSITION.BOTTOM_RIGHT })
         })
     }
 
@@ -132,6 +139,7 @@ class ProductProvider extends Component {
             {
                 this.props.children
             } 
+            <ToastContainer />
         </ProductContext.Provider>
         );
     }
