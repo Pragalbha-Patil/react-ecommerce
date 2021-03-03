@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
 import {ProductConsumer} from '../Context';
 import {Link} from 'react-router-dom';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'; 
+
+var images = [];
 
 export default class ProductDetails extends Component {
 
-    state = {
-        size: 0,
-        id: 0
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            size: 0,
+            id: 0,
+            photoIndex: 0,
+            isOpen: false,
+        }
     }
 
     setSize = (size) => {
@@ -29,7 +39,17 @@ export default class ProductDetails extends Component {
         console.log(this.state.id);
     }
 
+    addPhotosToArray = (img) => {
+        images = [];
+        let url = "https://www.prolicing.tech/";
+        img = url + img;
+        images.push(img);
+        console.log("images: "+images);
+    }
+
     render() {
+        const { photoIndex, isOpen } = this.state;
+
         return (
             <ProductConsumer>
                 {
@@ -38,6 +58,10 @@ export default class ProductDetails extends Component {
                         console.log(img);
                         let offer = Math.floor(Math.random() * 10) + 50;
                         let discount = Math.floor((offer * price) / 100);
+
+                        img.forEach(element => {
+                           this.addPhotosToArray(element); 
+                        });
                         
                         // const renderImages = () => {
                         //     img.map(element => {
@@ -63,7 +87,25 @@ export default class ProductDetails extends Component {
                                     {/* shirt img */}
                                     <div className="col-10 mx-auto col-md-6 my-3">
                                         {/* {renderImages()} */}
-                                        <img src={"https://www.prolicing.tech/"+img[0]} className="img-fluid" alt="shirt" /> 
+                                        <img src={"https://www.prolicing.tech/"+img[0]} className="img-fluid" alt="shirt" onClick={() => this.setState({ isOpen: true })} /> 
+                                        {isOpen && (
+                                            <Lightbox
+                                                mainSrc={images[photoIndex]}
+                                                nextSrc={images[(photoIndex + 1) % images.length]}
+                                                prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+                                                onCloseRequest={() => this.setState({ isOpen: false })}
+                                                onMovePrevRequest={() =>
+                                                this.setState({
+                                                    photoIndex: (photoIndex + images.length - 1) % images.length,
+                                                })
+                                                }
+                                                onMoveNextRequest={() =>
+                                                this.setState({
+                                                    photoIndex: (photoIndex + 1) % images.length,
+                                                })
+                                                }
+                                            />
+                                        )}
                                     </div>
                                     {/* shirt name */}
                                     <div className="col-10 mx-auto col-md-6 my-3 text-capitalize">
