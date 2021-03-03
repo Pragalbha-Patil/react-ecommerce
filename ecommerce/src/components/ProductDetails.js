@@ -122,31 +122,31 @@ export default class ProductDetails extends Component {
                                             Select size
                                         </p>
                                         <button className="dot m-2" id="32" onClick={() => this.setSize(32)} style={{
-                                            outline: (this.state.size == 32) ? 'var(--pink) auto 5px' : '',
-                                            color:  (this.state.size == 32) ? 'var(--pink)' : '',
-                                            borderRadius: (this.state.size == 32) ? '20%' : '20%',
+                                            outline: (this.state.size === 32) ? 'var(--pink) auto 5px' : '',
+                                            color:  (this.state.size === 32) ? 'var(--pink)' : '',
+                                            borderRadius: (this.state.size === 32) ? '20%' : '20%',
                                         }}>32</button>
                                         <button className="dot m-2" id="38" onClick={() => this.setSize(38)} style={{
-                                            outline: (this.state.size == 38) ? 'var(--pink) auto 5px' : '',
-                                            color:  (this.state.size == 38) ? 'var(--pink)' : '',
-                                            borderRadius: (this.state.size == 38) ? '20%' : '20%',
+                                            outline: (this.state.size === 38) ? 'var(--pink) auto 5px' : '',
+                                            color:  (this.state.size === 38) ? 'var(--pink)' : '',
+                                            borderRadius: (this.state.size === 38) ? '20%' : '20%',
                                         }}>38</button>
                                         <button className="dot m-2" id="40" onClick={() => this.setSize(40)} style={{
-                                            outline: (this.state.size == 40) ? 'var(--pink) auto 5px' : '',
-                                            color:  (this.state.size == 40) ? 'var(--pink)' : '',
-                                            borderRadius: (this.state.size == 40) ? '20%' : '20%',
+                                            outline: (this.state.size === 40) ? 'var(--pink) auto 5px' : '',
+                                            color:  (this.state.size === 40) ? 'var(--pink)' : '',
+                                            borderRadius: (this.state.size === 40) ? '20%' : '20%',
                                         }}>40</button>
                                         <button className="dot m-2" id="42" onClick={() => this.setSize(42)} style={{
-                                            outline: (this.state.size == 42) ? 'var(--pink) auto 5px' : '',
-                                            color:  (this.state.size == 42) ? 'var(--pink)' : '',
-                                            borderRadius: (this.state.size == 42) ? '20%' : '20%',
+                                            outline: (this.state.size === 42) ? 'var(--pink) auto 5px' : '',
+                                            color:  (this.state.size === 42) ? 'var(--pink)' : '',
+                                            borderRadius: (this.state.size === 42) ? '20%' : '20%',
                                         }}>42</button>
                                         <hr />
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <button className="cartBtn mt-4" onClick={() => value.addToCart(id, this.state.size)} disabled={(this.state.size == 0) ? true : false} style={{backgroundColor: (this.state.size == 0) ? '#EBEBE4' : "var(--pink)", cursor: (this.state.size == 0) ? 'auto' : "pointer"}}>
+                                                <button className="cartBtn mt-4" onClick={() => value.addToCart(id, this.state.size)} disabled={(this.state.size === 0) ? true : false} style={{backgroundColor: (this.state.size === 0) ? '#EBEBE4' : "var(--pink)", cursor: (this.state.size === 0) ? 'auto' : "pointer"}}>
                                                 <span>
-                                                    <i className="fa fa-shopping-basket" /> {(this.state.size == 0) ? 'SELECT SIZE' : "Add to Cart"}
+                                                    <i className="fa fa-shopping-basket" /> {(this.state.size === 0) ? 'SELECT SIZE' : "Add to Cart"}
                                                 </span>
                                                 </button>
                                             </div>
