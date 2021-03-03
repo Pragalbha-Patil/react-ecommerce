@@ -26,7 +26,7 @@ export default class Products extends Component {
                                 <ProductConsumer>
                                     {
                                         (value) => {
-                                            console.log(value);
+                                            //console.log(value);
                                             return value.shirts.map(shirt => {
                                                 return <Product key={shirt.id} shirt={shirt} />
                                             })
