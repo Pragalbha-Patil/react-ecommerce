@@ -8,7 +8,8 @@ class ProductProvider extends Component {
 
     state = {
         shirts: [],
-        detailProduct: null
+        detailProduct: null,
+        cart: []
     }
 
     componentDidMount() {
@@ -17,24 +18,25 @@ class ProductProvider extends Component {
         // .then(shirtsData => {
         //     this.setState({ shirts: shirtsData });
         // });
-
         fetch('https://www.prolicing.tech/get-shirts-data')
-            .then((response) => response.json())
-            .then(shirtsData => {
-                let tempProducts = [];
-                shirtsData.forEach(element => {
-                    const singleItem = {
-                        ...element
-                    };
-                    tempProducts = [...tempProducts, singleItem];
-                });
-                this.shuffle(tempProducts); // shuffles the array to avoid cliched views
-                this.setState(() => {
-                    return {
-                        shirts: tempProducts
-                    };
-                });
+        .then((response) => response.json())
+        .then(shirtsData => {
+            let tempProducts = [];
+            shirtsData.forEach(element => {
+                const singleItem = {
+                    ...element
+                };
+                tempProducts = [...tempProducts, singleItem];
             });
+            this.shuffle(tempProducts); // shuffles the array to avoid cliched views
+            this.setState(() => {
+                return {
+                    shirts: tempProducts
+                };
+            }, () => {
+                this.restoreCart();
+            });
+        });
     }
 
     shuffle(array) {
@@ -70,9 +72,52 @@ class ProductProvider extends Component {
         return product
     }
 
+    restoreCart = () => {
+        const itemId = localStorage.getItem('itemID');
+        if(itemId) {
+            console.log(itemId);
+            let tempProduct = [...this.state.shirts];
+            console.log("tempproducts: " + tempProduct);
+            const index = tempProduct.indexOf(this.getItem(parseInt(itemId)));
+            console.log(index);
+            const product = tempProduct[index];
+            console.log("Product from localstorage: "+ product);
+            if(product) {
+                product.inCart = true;
+                product.count++;
+                product.total = product.price * product.count;
+    
+                this.setState(() => {
+                    return {shirts: tempProduct, cart: [...this.state.cart, product]};
+                }, () => {
+                    console.log("Cart restored from localstorage:");
+                    //alert("Cart restored");
+                    console.log(this.state);
+                })
+            }
+        }
+    }
+
     addToCart = (id, size) => {
+        if(!size) size = 32;
         console.log("Shirt of id "+id+" added to cart.");
-        alert("Shirt of size "+size+" added to cart.");
+        //alert("Shirt of size "+size+" added to cart.");
+        
+
+        let tempProduct = [...this.state.shirts];
+        const index = tempProduct.indexOf(this.getItem(id));
+        const product = tempProduct[index];
+        product.inCart = true;
+        product.count++;
+        product.total = product.price * product.count;
+
+        localStorage.setItem('itemID', id);
+
+        this.setState(() => {
+            return {shirts: tempProduct, cart: [...this.state.cart, product]};
+        }, () => {
+            console.log(this.state);
+        })
     }
 
     render() {
