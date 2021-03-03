@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import { Modal, Button } from "react-bootstrap";
+import {ProductConsumer} from '../Context';
 // import styled from 'styled-components';
 
 export default class Navbar extends Component {
 
-    sayHello() {
-        alert('Hello!');
+    state = {
+        isOpen: false,
+        cartCount: 0,
+    };
+
+    openModal = () => {
+
+
+        // at last open the modal
+        this.setState({ isOpen: true });
     }
+    closeModal = () => this.setState({ isOpen: false });
 
     render() {
         return (
@@ -53,10 +64,21 @@ export default class Navbar extends Component {
                         </div>
                     </div>
                     <div className="header-profile">
-                        <a className="header-profile-links ripple-grow" onClick={this.sayHello}>
-                            <span className="ripple-waves ripple ripple-dark">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
-                            </span>
+                        <a className="header-profile-links ripple-grow" onClick={this.openModal}>
+                            <ProductConsumer>
+                                {
+                                    (value) => {
+                                        console.log(value.count);
+                                        return (
+                                                <span className="ripple-waves ripple ripple-dark">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/>
+                                                </svg>
+                                                    {value.count}
+                                                </span>
+                                        );
+                                    }
+                                }
+                            </ProductConsumer>
                         </a>
                         {/* <a className="hader-profile-links ripple-grow">
                             <span className="ripple-waves ripple ripple-dark">
@@ -73,6 +95,37 @@ export default class Navbar extends Component {
                         </a> */}
                     </div>
                 </header>
+                    <Modal show={this.state.isOpen} onHide={this.closeModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Your Cart</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <ProductConsumer>
+                                {
+                                    (value) => {
+                                        console.log(value.cart);
+                                        let array = value.cart;
+                                        return (
+                                            array.map(element => {
+                                                console.log(element.title);
+                                                return (
+                                                    <div>
+                                                        <li className="text-center">{element.title}</li>
+                                                    </div>
+                                                );
+                                                console.log(this.state.cartCount);
+                                            })
+                                        );
+                                    }
+                                }
+                            </ProductConsumer>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.closeModal}>
+                            Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
             </div>
         );
     }

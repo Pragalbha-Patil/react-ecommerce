@@ -15,7 +15,8 @@ class ProductProvider extends Component {
     state = {
         shirts: [],
         detailProduct: null,
-        cart: []
+        cart: [],
+        count: 0,
     }
 
     componentDidMount() {
@@ -100,9 +101,9 @@ class ProductProvider extends Component {
                         product.total = product.price * product.count;
             
                         this.setState(() => {
-                            return {shirts: tempProduct, cart: [...this.state.cart, product]};
+                            return {shirts: tempProduct, cart: [...this.state.cart, product], count: this.state.count + 1};
                         }, () => {                
-                            //console.log(this.state);
+                            console.log(this.state);
                         })
                     }
                 }
@@ -158,9 +159,9 @@ class ProductProvider extends Component {
 
 
         this.setState(() => {
-            return {shirts: tempProduct, cart: [...this.state.cart, product]};
+            return {shirts: tempProduct, cart: [...this.state.cart, product], count: this.state.count + 1};
         }, () => {
-            //console.log(this.state);
+            console.log(this.state);
             toast.success("Added to cart!", { position: toast.POSITION.BOTTOM_RIGHT })
         })
     }
