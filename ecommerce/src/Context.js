@@ -4,7 +4,7 @@ import React, {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+var cartItemsID = "";
 
 const ProductContext = React.createContext();
 
@@ -80,28 +80,54 @@ class ProductProvider extends Component {
     }
 
     restoreCart = () => {
-        const itemId = localStorage.getItem('itemID');
-        if(itemId) {
-            console.log(itemId);
-            let tempProduct = [...this.state.shirts];
-            console.log("tempproducts: " + tempProduct);
-            const index = tempProduct.indexOf(this.getItem(parseInt(itemId)));
-            console.log(index);
-            const product = tempProduct[index];
-            console.log("Product from localstorage: "+ product);
-            if(product) {
-                product.inCart = true;
-                product.count++;
-                product.total = product.price * product.count;
-    
-                this.setState(() => {
-                    return {shirts: tempProduct, cart: [...this.state.cart, product]};
-                }, () => {
-                    toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
-                    //console.log(this.state);
-                })
+        var itemId = localStorage.getItem('itemID');
+        console.log(typeof(itemId));
+        itemId.replace(/['"]+/g, '')
+        let array = itemId.replace('"', '').split(",");
+        console.log((array));
+        array.forEach(item => {
+            console.log(parseInt(item));
+            if(!isNaN(parseInt(item))) {
+                let tempProduct = [...this.state.shirts];
+                const index = tempProduct.indexOf(this.getItem(parseInt(item)));
+                //console.log(index);
+                const product = tempProduct[index];
+                //console.log("Product from localstorage: "+ product);
+                if(product) {
+                    product.inCart = true;
+                    product.count++;
+                    product.total = product.price * product.count;
+        
+                    this.setState(() => {
+                        return {shirts: tempProduct, cart: [...this.state.cart, product]};
+                    }, () => {                
+                        console.log(this.state);
+                    })
+                }
             }
-        }
+        });
+        toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+        // if(itemId) {
+        //     console.log(itemId);
+        //     let tempProduct = [...this.state.shirts];
+        //     console.log("tempproducts: " + tempProduct);
+        //     const index = tempProduct.indexOf(this.getItem(parseInt(itemId)));
+        //     console.log(index);
+        //     const product = tempProduct[index];
+        //     console.log("Product from localstorage: "+ product);
+        //     if(product) {
+        //         product.inCart = true;
+        //         product.count++;
+        //         product.total = product.price * product.count;
+    
+        //         this.setState(() => {
+        //             return {shirts: tempProduct, cart: [...this.state.cart, product]};
+        //         }, () => {
+        //             toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+        //             //console.log(this.state);
+        //         })
+        //     }
+        // }
     }
 
     addToCart = (id, size) => {
@@ -117,7 +143,17 @@ class ProductProvider extends Component {
         product.count++;
         product.total = product.price * product.count;
 
-        localStorage.setItem('itemID', id);
+        // save to localstorage
+        // localStorage.setItem('itemID', id);
+        if(cartItemsID === "") {
+            cartItemsID = id;
+        }
+        else {
+            cartItemsID = cartItemsID + ","+id;
+        }
+        localStorage.setItem("itemID", JSON.stringify(cartItemsID));
+        //JSON.parse(localStorage.getItem("itemID"));
+
 
         this.setState(() => {
             return {shirts: tempProduct, cart: [...this.state.cart, product]};
