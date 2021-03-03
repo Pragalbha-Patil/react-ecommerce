@@ -81,32 +81,34 @@ class ProductProvider extends Component {
 
     restoreCart = () => {
         var itemId = localStorage.getItem('itemID');
-        console.log(typeof(itemId));
-        itemId.replace(/['"]+/g, '')
-        let array = itemId.replace('"', '').split(",");
-        console.log((array));
-        array.forEach(item => {
-            console.log(parseInt(item));
-            if(!isNaN(parseInt(item))) {
-                let tempProduct = [...this.state.shirts];
-                const index = tempProduct.indexOf(this.getItem(parseInt(item)));
-                //console.log(index);
-                const product = tempProduct[index];
-                //console.log("Product from localstorage: "+ product);
-                if(product) {
-                    product.inCart = true;
-                    product.count++;
-                    product.total = product.price * product.count;
-        
-                    this.setState(() => {
-                        return {shirts: tempProduct, cart: [...this.state.cart, product]};
-                    }, () => {                
-                        console.log(this.state);
-                    })
+        if(itemId) {
+            //console.log(typeof(itemId));
+            itemId.replace(/['"]+/g, '')
+            let array = itemId.replace('"', '').split(",");
+            //console.log((array));
+            array.forEach(item => {
+                //console.log(parseInt(item));
+                if(!isNaN(parseInt(item))) {
+                    let tempProduct = [...this.state.shirts];
+                    const index = tempProduct.indexOf(this.getItem(parseInt(item)));
+                    //console.log(index);
+                    const product = tempProduct[index];
+                    //console.log("Product from localstorage: "+ product);
+                    if(product) {
+                        product.inCart = true;
+                        product.count++;
+                        product.total = product.price * product.count;
+            
+                        this.setState(() => {
+                            return {shirts: tempProduct, cart: [...this.state.cart, product]};
+                        }, () => {                
+                            //console.log(this.state);
+                        })
+                    }
                 }
-            }
-        });
-        toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+            });
+            toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+        }
         // if(itemId) {
         //     console.log(itemId);
         //     let tempProduct = [...this.state.shirts];
