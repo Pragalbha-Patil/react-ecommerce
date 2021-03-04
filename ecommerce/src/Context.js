@@ -86,19 +86,23 @@ class ProductProvider extends Component {
         })
     }
 
-    removeElementFromCart(e) {
-        console.log("in remove cart");
-        console.log(e);
-        var array = [...this.state.cart]; // make a separate copy of the array
-        const index = array.indexOf(this.getItem(e));
-        if (index !== -1) {
-          array.splice(index, 1);
-          this.setState(() => {
-            return {cart: array};
-          });
-          console.log("element removed");
-          console.log(this.state.cart);
-        }
+    removeItem = id => {
+        let tempShirts = [...this.state.shirts];
+        let tempCart = [...this.state.cart];
+
+        tempCart = tempCart.filter(item => item.id !== id);
+        const index = tempShirts.indexOf(this.getItem(id));
+        let removedShirt = tempShirts[index];
+        removedShirt.inCart = false;
+        removedShirt.count = 0;
+        removedShirt.total = 0;
+
+        this.setState(() => {
+            return {
+                cart: [...tempCart],
+                shirts: [...tempShirts]
+            }
+        })
     }
 
     getItem = (id) => {
@@ -118,6 +122,24 @@ class ProductProvider extends Component {
             console.log("Cart is updated");                
             console.log(this.state);
         })
+    }
+
+    decrementItem = id => {
+        let tempCart = [...this.state.cart];
+        const selectedProduct = tempCart.find(item => item.id === id);
+
+        const index = tempCart.indexOf(selectedProduct);
+        const product = tempCart[index];
+        product.count = product.count - 1;
+
+        if(product.count === 0) {
+            this.removeItem(id);
+        }
+        else {
+            this.setState(() => {
+                return {cart: [...tempCart]};
+            })
+        }
     }
 
     restoreCart = () => {
@@ -218,6 +240,8 @@ class ProductProvider extends Component {
                     handleDetail: this.handleDetail,
                     addToCart: this.addToCart,
                     clearCart: this.clearCart,
+                    removeItem: this.removeItem,
+                    decrementItem: this.decrementItem,
                 }
             }> 
             {
@@ -233,5 +257,5 @@ const ProductConsumer = ProductContext.Consumer;
 
 export {
     ProductProvider,
-    ProductConsumer
+    ProductConsumer,
 };

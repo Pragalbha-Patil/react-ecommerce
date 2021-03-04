@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
-import {ProductConsumer} from '../Context';
+import {ProductConsumer, removeItem} from '../Context';
 // import styled from 'styled-components';
 
 export default class Navbar extends Component {
@@ -26,25 +26,29 @@ export default class Navbar extends Component {
         }
         else {
             if(element.count == 1) {
-                window.confirm("This will remove the item from your cart");
+                if(window.confirm("This will remove the item from your cart")) {
+                    <ProductConsumer>
+                        {
+                            (value) => {
+                                console.log("here"+value);
+                                return (
+                                    value.removeItem(id)
+                                );
+                            }
+                        }
+                    </ProductConsumer>
+                }
             }
             if(element.count < 1) {
                 alert("Cannot decrement further. Remove element from cart");
             }
             else {
-                console.log("Count of ID " + id + " will be decremented");
+                //console.log("Count of ID " + id + " will be decremented");
                 element.count--;
                 element.total = element.price / element.count;
                 this.forceUpdate();
             }
         }
-    }
-
-    removeElementFromCart(element, id) {
-        element.inCart = false;
-        console.log("Element after inCart false: ");
-        console.log(element);
-        this.forceUpdate();
     }
 
     render() {
@@ -170,22 +174,23 @@ export default class Navbar extends Component {
                                                                             </span>
                                                                             <span style={{fontSize: "20px"}}> {element.count} </span>
                                                                             <span>
-                                                                                <button onClick={() => {this.changeCount(element.id, false, element)}} className="decrementBtn">
-                                                                                <i class="fa fa-minus"></i>
-                                                                                </button>
+                                                                            <ProductConsumer>
+                                                                                {
+                                                                                    (value) => {
+                                                                                        return (
+                                                                                            <button onClick={() => {value.decrementItem(element.id)}} className="decrementBtn">
+                                                                                                <i class="fa fa-minus"></i>
+                                                                                            </button>
+                                                                                        );
+                                                                                    }
+                                                                                }
+                                                                            </ProductConsumer>
                                                                             </span>
                                                                         </td>
                                                                         <td>
                                                                             <i class="fa fa-trash" onClick={() => {
                                                                                 if(window.confirm("Are you sure to delete this item from your cart?")) {
-                                                                                    // <ProductConsumer>
-                                                                                    //     {
-                                                                                    //         (value) => {
-                                                                                    //             console.log("Removing: "+element.id);
-                                                                                    //             value.removeElementFromCart(element.id);
-                                                                                    //         }
-                                                                                    //     }
-                                                                                    // </ProductConsumer>
+                                                                                    value.removeItem(element.id);
                                                                                 }
                                                                             }}></i>
                                                                         </td>
