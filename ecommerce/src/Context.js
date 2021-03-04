@@ -16,7 +16,6 @@ class ProductProvider extends Component {
         shirts: [],
         detailProduct: null,
         cart: [],
-        count: 0,
     }
 
     componentDidMount() {
@@ -80,7 +79,39 @@ class ProductProvider extends Component {
         return product
     }
 
+    updateCartState = (product, tempProduct) => {
+        product.inCart = true;
+        product.count++;
+        product.total = product.price * product.count;
+            
+        this.setState(() => {
+            return {shirts: tempProduct, cart: [...this.state.cart, product]};
+        }, () => {                
+            console.log(this.state);
+        })
+    }
+
     restoreCart = () => {
+        // let array = [...this.state.shirts];
+        // if(array) {
+        //     array.forEach(element => {
+        //         //console.log(element);
+        //         console.log("here one");
+        //         console.log(typeof(element));
+        //         if(element.inCart) {
+        //             console.log("here two");
+        //             console.log("inCart is set for element: ");
+        //             console.log(element);
+        //             let tempProduct = [...this.state.shirts];
+        //             const index = tempProduct.indexOf(element);
+        //             const product = tempProduct[index];
+        //             if(product) this.updateCartState(product, tempProduct);
+        //         }
+        //         else {
+        //             console.log("oops")
+        //         }
+        //     });
+        // }
         var itemId = localStorage.getItem('itemID');
         if(itemId) {
             //console.log(typeof(itemId));
@@ -96,15 +127,7 @@ class ProductProvider extends Component {
                     const product = tempProduct[index];
                     //console.log("Product from localstorage: "+ product);
                     if(product) {
-                        product.inCart = true;
-                        product.count++;
-                        product.total = product.price * product.count;
-            
-                        this.setState(() => {
-                            return {shirts: tempProduct, cart: [...this.state.cart, product], count: this.state.count + 1};
-                        }, () => {                
-                            console.log(this.state);
-                        })
+                        this.updateCartState(product, tempProduct);
                     }
                 }
             });
@@ -142,10 +165,8 @@ class ProductProvider extends Component {
         let tempProduct = [...this.state.shirts];
         const index = tempProduct.indexOf(this.getItem(id));
         const product = tempProduct[index];
-        product.inCart = true;
-        product.count++;
-        product.total = product.price * product.count;
-
+        if(product) this.updateCartState(product, tempProduct);
+        
         // save to localstorage
         // localStorage.setItem('itemID', id);
         if(cartItemsID === "") {
@@ -156,14 +177,8 @@ class ProductProvider extends Component {
         }
         localStorage.setItem("itemID", JSON.stringify(cartItemsID));
         //JSON.parse(localStorage.getItem("itemID"));
-
-
-        this.setState(() => {
-            return {shirts: tempProduct, cart: [...this.state.cart, product], count: this.state.count + 1};
-        }, () => {
-            console.log(this.state);
-            toast.success("Added to cart!", { position: toast.POSITION.BOTTOM_RIGHT })
-        })
+        
+        toast.success("Added to cart!", { position: toast.POSITION.BOTTOM_RIGHT })
     }
 
     render() {
