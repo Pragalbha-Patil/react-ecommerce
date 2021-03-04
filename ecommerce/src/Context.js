@@ -24,7 +24,10 @@ class ProductProvider extends Component {
         // .then(shirtsData => {
         //     this.setState({ shirts: shirtsData });
         // });
-        
+        this.getShirtsFromServer(true);
+    }
+
+    getShirtsFromServer(shouldRestoreCart) {
         fetch('https://www.prolicing.tech/get-shirts-data')
         .then((response) => response.json())
         .then(shirtsData => {
@@ -41,7 +44,7 @@ class ProductProvider extends Component {
                     shirts: tempProducts
                 };
             }, () => {
-                this.restoreCart();
+                if(shouldRestoreCart) this.restoreCart();
             });
         });
     }
@@ -77,6 +80,9 @@ class ProductProvider extends Component {
     clearCart = () => {
         this.setState(() => {
             return {cart: []}
+        }, () => {
+            localStorage.clear();
+            this.getShirtsFromServer(false);
         })
     }
 
