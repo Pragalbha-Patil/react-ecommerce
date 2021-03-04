@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ProductConsumer} from '../Context';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; 
 
@@ -45,6 +45,11 @@ export default class ProductDetails extends Component {
         img = url + img;
         images.push(img);
         console.log("images: "+images);
+    }
+
+    componentDidCatch(err) {
+        console.error(err);
+        window.location = "/";
     }
 
     render() {
