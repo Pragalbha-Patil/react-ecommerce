@@ -37,11 +37,11 @@ export default class Navbar extends Component {
                                     <a className="header-nav-link active">Shirts</a>
                                 </Link>
                             </li>
-                            <li className="header-nav-item">
+                            {/* <li className="header-nav-item">
                                 <Link to="/about">
                                     <a className="header-nav-link ripple ripple-dark">About</a>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <a className="header-back ripple-grow" id="back">
@@ -71,6 +71,10 @@ export default class Navbar extends Component {
                         </div>
                     </div>
                     <div className="header-profile">
+                        <a className="header-profile-links ripple-grow" onClick={() => {alert("This will open wishlist, feature not implemented yet.")}}>
+                            <i className="fa fa-bookmark"></i>
+                        </a>
+                        <pre>   </pre>
                         <a className="header-profile-links ripple-grow" onClick={this.openModal}>
                             <ProductConsumer>
                                 {
