@@ -7,11 +7,6 @@
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-/* *,
-*::before,
-*::after {
-    box-sizing: border-box;
-} */
 
 html {
     height: 100%;
@@ -20,13 +15,7 @@ html {
 body {
     margin: 0;
 	height: 100%;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* min-height: 100vh; */
-    /* margin: 0; */
-    /* font-size: 1rem; */
     font-family: "Roboto", sans-serif;
-    /* line-height: 1.5; */
     color: var(--dark);
     background-color: white;
 }
@@ -65,15 +54,6 @@ a:hover {
     cursor: pointer;
 }
 
-/* a:hover {
-    color: #0a0c0e;
-    text-decoration: none;
-    cursor: pointer;
-} */
-/* a:focus {
-    outline: none;
-} */
-
 .header {
     position: fixed;
     top: 0;
@@ -91,9 +71,6 @@ a:hover {
     background-color: #fff;
 }
 
-/* .content {
-    margin-top: 5%;
-} */
 
 .header-logo {
     margin-right: auto;
@@ -106,19 +83,6 @@ a:hover {
     font-weight: 600;
 }
 
-/* .header-logo .header-brand:hover {
-    text-decoration: none;
-}
-
-.header-logo .header-brand .brand-logo {
-    margin-right: 1rem;
-    border-radius: 50%;
-}
-
-.header-logo .header-brand .brand-text {
-    margin-right: 1rem;
-    display: none;
-} */
 
 @media screen and (min-width: 768px) {
     .header-logo .header-brand .brand-text {
@@ -232,9 +196,6 @@ a:hover {
     left: 10px;
 }
 
-/* .header .header-back .icon-back {
-    transform: rotate(90deg);
-} */
 
 .header.show .header-logo,
 .header.show .header-nav,
@@ -268,11 +229,6 @@ a:hover {
     opacity: 100;
 }
 
-/* .header.show .header-back .icon-back {
-    transform: rotate(0deg);
-    transition: transform 0.5s cubic-bezier(0.42, 0, 0, 0.57);
-} */
-
 .ripple-container {
     position: absolute;
     left: 0;
@@ -282,17 +238,6 @@ a:hover {
     pointer-events: none;
     overflow: hidden;
 }
-
-/* .ripple-effect {
-    margin-top: 0px;
-    margin-left: 0px;
-    width: 1px;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.033);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 50%;
-    pointer-events: none;
-} */
 
 .ripple-effect.ripple-light {
     background-color: rgba(255, 255, 255, 0.15);
@@ -350,39 +295,6 @@ a:hover {
     animation: ripple-grow 0.3s linear;
     transform: scale(1);
 }
-
-/* .ripple-grow:hover .ripple-icon {
-    color: #0a0c0e;
-}
-.ripple-grow:focus .ripple-waves::before, .ripple-grow:active .ripple-waves::before, .ripple-grow.active .ripple-waves::before {
-    background-color: rgba(33, 37, 41, 0.6);
-    opacity: 0.2;
-    -webkit-animation: ripple-grow 0.3s linear;
-    animation: ripple-grow 0.3s linear;
-    transform: scale(1);
-}
-
-@-webkit-keyframes ripple-grow {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        opacity: 0.1;
-        transform: scale(1);
-    }
-}
-
-@keyframes ripple-grow {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        opacity: 0.1;
-        transform: scale(1);
-    }
-} */
 
 .text-pink {
     color: var(--pink);
@@ -449,6 +361,6 @@ a:hover {
 }
 
 .cartModal {
-    width: 50vw;    /* Occupy the 90% of the screen width */
+    width: 50vw;    /* Occupy the 50% of the screen width */
     max-width: 90vw;
 }

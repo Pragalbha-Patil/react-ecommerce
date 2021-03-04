@@ -71,9 +71,9 @@ export default class Navbar extends Component {
                         </div>
                     </div>
                     <div className="header-profile">
-                        <a className="header-profile-links ripple-grow" onClick={() => {alert("This will open wishlist, feature not implemented yet.")}}>
+                        {/* <a className="header-profile-links ripple-grow" onClick={() => {alert("This will open wishlist, feature not implemented yet.")}}>
                             <i className="fa fa-bookmark"></i>
-                        </a>
+                        </a> */}
                         <pre>   </pre>
                         <a className="header-profile-links ripple-grow" onClick={this.openModal}>
                             <ProductConsumer>
