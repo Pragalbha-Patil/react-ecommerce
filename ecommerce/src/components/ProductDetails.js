@@ -116,7 +116,9 @@ export default class ProductDetails extends Component {
                                         <hr />
                                         {/* price */}
                                         <h4>
-                                            Price: <strong><span>  Rs. {discount}</span> </strong> <strike className="text-muted">Rs. {price}</strike>  <span className="text-pink ml-2">({offer}% off)</span>
+                                            {/* <span>  Rs. {discount}</span> */}
+                                            Price: <strong> Rs. {price} </strong>
+                                            {/* <span className="text-pink ml-2">({offer}% off)</span> */}
                                         </h4>
                                         <p className="text-uppercase">
                                             Select size
