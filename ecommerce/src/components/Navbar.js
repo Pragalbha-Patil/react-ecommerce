@@ -12,12 +12,33 @@ export default class Navbar extends Component {
     };
 
     openModal = () => {
-
-
         // at last open the modal
         this.setState({ isOpen: true });
     }
     closeModal = () => this.setState({ isOpen: false });
+
+    changeCount = (id, status, element) => {
+        if(status) {
+            console.log("Count of ID " + id + " will be incremented");
+            element.count++;
+            element.total = element.price * element.count;
+            this.forceUpdate();
+        }
+        else {
+            if(element.count == 1) {
+                window.confirm("This will remove the item from your cart");
+            }
+            if(element.count < 1) {
+                alert("Cannot decrement further. Remove element from cart");
+            }
+            else {
+                console.log("Count of ID " + id + " will be decremented");
+                element.count--;
+                element.total = element.price / element.count;
+                this.forceUpdate();
+            }
+        }
+    }
 
     render() {
         return (
@@ -68,12 +89,12 @@ export default class Navbar extends Component {
                             <ProductConsumer>
                                 {
                                     (value) => {
-                                        console.log(value.count);
+                                        let count = value.cart.length;
                                         return (
                                                 <span className="ripple-waves ripple ripple-dark">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/>
                                                 </svg>
-                                                    {value.count}
+                                                    {count}
                                                 </span>
                                         );
                                     }
@@ -95,7 +116,7 @@ export default class Navbar extends Component {
                         </a> */}
                     </div>
                 </header>
-                    <Modal show={this.state.isOpen} onHide={this.closeModal}>
+                    <Modal show={this.state.isOpen} onHide={this.closeModal} dialogClassName="cartModal">
                         <Modal.Header closeButton>
                             <Modal.Title>Your Cart</Modal.Title>
                         </Modal.Header>
@@ -103,18 +124,63 @@ export default class Navbar extends Component {
                             <ProductConsumer>
                                 {
                                     (value) => {
+                                        console.log("CART from Navbar");
                                         console.log(value.cart);
-                                        let array = value.cart;
+                                        var array = value.cart;
+                                        let totalPrice = 0;
                                         return (
-                                            array.map(element => {
-                                                console.log(element.title);
-                                                return (
-                                                    <div>
-                                                        <li className="text-center">{element.title}</li>
-                                                    </div>
-                                                );
-                                                console.log(this.state.cartCount);
-                                            })
+                                            <div>
+                                                <table className="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Brand</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Total</th>
+                                                            <th scope="col">Remove</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {
+                                                        array.map(element => {
+                                                            console.log(element.title);
+                                                            return (
+                                                                    <tr key={element.id}>
+                                                                        <td className="mt-2">{element.title}</td>
+                                                                        <td className="mt-10 text-muted">{element.brand}</td>
+                                                                        <td className="mt-2">Rs.{element.price}</td>
+                                                                        <td className="text-center">
+                                                                            <span>
+                                                                                <button onClick={() => {this.changeCount(element.id, true, element);}} className="incrementBtn">
+                                                                                <i class="fa fa-plus"></i>
+                                                                                </button>
+                                                                            </span>
+                                                                            <span style={{fontSize: "20px"}}> {element.count} </span>
+                                                                            <span>
+                                                                                <button onClick={() => {this.changeCount(element.id, false, element)}} className="decrementBtn">
+                                                                                <i class="fa fa-minus"></i>
+                                                                                </button>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <i class="fa fa-trash" onClick={() => {window.confirm("Do you want to remove this item?")}}></i>
+                                                                        </td>
+                                                                    </tr>
+                                                            );
+                                                        })
+                                                    }
+                                                    </tbody>
+                                                </table>
+                                                <hr />
+                                                {
+                                                    array.map(element => {
+                                                        console.log(element.title);
+                                                        totalPrice += element.price * element.count
+                                                        
+                                                    })
+                                                }
+                                                <h6 className="float-right">Total Price: Rs.{totalPrice}</h6>
+                                            </div>
                                         );
                                     }
                                 }
