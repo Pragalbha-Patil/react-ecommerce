@@ -17,6 +17,7 @@ class ProductProvider extends Component {
         shirts: [],
         detailProduct: null,
         cart: [],
+        wishlist: [],
     }
 
     componentDidMount() {
@@ -177,7 +178,17 @@ class ProductProvider extends Component {
                     }
                 }
             });
-            toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+            toast.info("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
+        }
+    }
+
+    addToWishlist = (id) => {
+        let tempProduct = [...this.state.shirts];
+        const index = tempProduct.indexOf(this.getItem(id));
+        const product = tempProduct[index];
+        if(product) {
+            product.wishlist = true;
+            toast.success(product.title + " added to wishlist!", { position: toast.POSITION.BOTTOM_RIGHT })
         }
     }
 
@@ -256,6 +267,7 @@ class ProductProvider extends Component {
                     decrementItem: this.decrementItem,
                     incrementItem: this.incrementItem,
                     searchProducts: this.searchProducts,
+                    addToWishlist: this.addToWishlist,
                 }
             }> 
             {

@@ -26,7 +26,7 @@ export default class Navbar extends Component {
                             <a className="header-brand">
                             <img src="/logo.png" alt="logo" width="20px" height="auto" />
                             <pre>   </pre>
-                            <span className="brand-text">E-commerce</span>
+                            <span className="brand-text text-uppercase">E-commerce</span>
                             </a>
                         </Link>
                     </div>

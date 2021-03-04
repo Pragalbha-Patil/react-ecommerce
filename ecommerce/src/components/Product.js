@@ -5,7 +5,7 @@ import {ProductConsumer} from '../Context';
 
 export default class Product extends Component {
     render() {
-        const {id, title, price, img, brand, inCart} = this.props.shirt;
+        const {id, title, price, img, brand, wishlist} = this.props.shirt;
         return (
             <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                 <div className="card">
@@ -15,15 +15,15 @@ export default class Product extends Component {
                             <Link to="/details">
                                 <img src={"https://www.prolicing.tech/"+img[0]} alt="product" className="card-img-top"/>
                             </Link>
-                            <button className="cart-btn" disabled={inCart ? true : false} onClick={() => {value.addToCart(id)}}>
-                                {inCart ? (<p className="text-capitalize mb-0" disabled>in cart</p>): (<i className="fa fa-cart-plus" />)}
+                            <button className="cart-btn" disabled={wishlist ? true : false} onClick={() => {value.addToWishlist(id)}}>
+                                {wishlist ? (<p className="text-capitalize mb-0" disabled>Wishlisted</p>): (<i className="fa fa-heart" />)}
                             </button>
                         </div>
                         )}
                     </ProductConsumer>
                     {/* card footer */}
                     <div className="card-footer d-flex justify-content-between">
-                        <p className="align-self-center mb-0" style={{fontSize: "0.6em"}}>
+                        <p className="align-self-center mb-0">
                             {title}
                         </p>
                         <h5 className="text-blue mb-0">
@@ -89,7 +89,7 @@ const ProductWrapper = styled.div`
         transition: all 0.3s linear
     }
     .cart-btn: hover {
-        color: var(--black);
+        color: var(--almost-black);
         cursor: pointer;
     }
 `;
