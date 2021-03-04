@@ -55,22 +55,13 @@ export default class ProductDetails extends Component {
                 {
                     value => {
                         const {id, title, price, brand, img, inCart} = value.detailProduct;
-                        console.log(img);
+                        //console.log(img);
                         let offer = Math.floor(Math.random() * 10) + 50;
                         let discount = Math.floor((offer * price) / 100);
 
                         img.forEach(element => {
                            this.addPhotosToArray(element); 
                         });
-                        
-                        // const renderImages = () => {
-                        //     img.map(element => {
-                        //         console.log(element);
-                        //         return (
-                        //             <img src={"https://www.prolicing.tech/"+element} className="img-fluid" alt="shirt" /> 
-                        //         );
-                        //     })
-                        // }
 
                         return (
                             <div className="container py-5">
@@ -146,9 +137,9 @@ export default class ProductDetails extends Component {
                                         <hr />
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <button className="cartBtn mt-4" onClick={() => value.addToCart(id, this.state.size)} disabled={(this.state.size === 0) ? true : false} style={{backgroundColor: (this.state.size === 0) ? '#EBEBE4' : "var(--pink)", cursor: (this.state.size === 0) ? 'auto' : "pointer"}}>
+                                                <button className="cartBtn mt-4" onClick={() => value.addToCart(id, this.state.size)} disabled={(inCart) ? true : false} style={{backgroundColor: (inCart) ? '#EBEBE4' : "var(--pink)", cursor: (inCart) ? 'auto' : "pointer"}}>
                                                 <span>
-                                                    <i className="fa fa-shopping-basket" /> {(this.state.size === 0) ? 'SELECT SIZE' : "Add to Cart"}
+                                                    <i className="fa fa-shopping-basket" /> {(inCart) ? 'Already in cart' : "Add to Cart"}
                                                 </span>
                                                 </button>
                                             </div>
