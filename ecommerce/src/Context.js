@@ -204,6 +204,11 @@ class ProductProvider extends Component {
         toast.success("Added to cart!", { position: toast.POSITION.BOTTOM_RIGHT })
     }
 
+    searchProducts = (query) => {
+        console.log("Query: " + query);
+        
+    }
+
     render() {
         return ( 
         <ProductContext.Provider value = {
@@ -214,7 +219,8 @@ class ProductProvider extends Component {
                     clearCart: this.clearCart,
                     removeItem: this.removeItem,
                     decrementItem: this.decrementItem,
-                    incrementItem: this.incrementItem
+                    incrementItem: this.incrementItem,
+                    searchProducts: this.searchProducts,
                 }
             }> 
             {
