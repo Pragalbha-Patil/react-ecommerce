@@ -17,40 +17,6 @@ export default class Navbar extends Component {
     }
     closeModal = () => this.setState({ isOpen: false });
 
-    changeCount = (id, status, element) => {
-        if(status) {
-            console.log("Count of ID " + id + " will be incremented");
-            element.count++;
-            element.total = element.price * element.count;
-            this.forceUpdate();
-        }
-        else {
-            if(element.count == 1) {
-                if(window.confirm("This will remove the item from your cart")) {
-                    <ProductConsumer>
-                        {
-                            (value) => {
-                                console.log("here"+value);
-                                return (
-                                    value.removeItem(id)
-                                );
-                            }
-                        }
-                    </ProductConsumer>
-                }
-            }
-            if(element.count < 1) {
-                alert("Cannot decrement further. Remove element from cart");
-            }
-            else {
-                //console.log("Count of ID " + id + " will be decremented");
-                element.count--;
-                element.total = element.price / element.count;
-                this.forceUpdate();
-            }
-        }
-    }
-
     render() {
         return (
             <div>
@@ -168,23 +134,31 @@ export default class Navbar extends Component {
                                                                         <td className="mt-2">Rs.{element.price}</td>
                                                                         <td className="text-center">
                                                                             <span>
-                                                                                <button onClick={() => {this.changeCount(element.id, true, element);}} className="incrementBtn">
-                                                                                <i class="fa fa-plus"></i>
-                                                                                </button>
+                                                                                <ProductConsumer>
+                                                                                    {
+                                                                                        (value) => {
+                                                                                            return (
+                                                                                                <button onClick={() => {value.incrementItem(element.id)}} className="incrementBtn">
+                                                                                                    <i class="fa fa-plus"></i>
+                                                                                                </button>
+                                                                                            );
+                                                                                        }
+                                                                                    }
+                                                                                </ProductConsumer>
                                                                             </span>
                                                                             <span style={{fontSize: "20px"}}> {element.count} </span>
                                                                             <span>
-                                                                            <ProductConsumer>
-                                                                                {
-                                                                                    (value) => {
-                                                                                        return (
-                                                                                            <button onClick={() => {value.decrementItem(element.id)}} className="decrementBtn">
-                                                                                                <i class="fa fa-minus"></i>
-                                                                                            </button>
-                                                                                        );
+                                                                                <ProductConsumer>
+                                                                                    {
+                                                                                        (value) => {
+                                                                                            return (
+                                                                                                <button onClick={() => {value.decrementItem(element.id)}} className="decrementBtn">
+                                                                                                    <i class="fa fa-minus"></i>
+                                                                                                </button>
+                                                                                            );
+                                                                                        }
                                                                                     }
-                                                                                }
-                                                                            </ProductConsumer>
+                                                                                </ProductConsumer>
                                                                             </span>
                                                                         </td>
                                                                         <td>

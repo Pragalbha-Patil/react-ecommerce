@@ -124,6 +124,19 @@ class ProductProvider extends Component {
         })
     }
 
+    incrementItem = id => {
+        let tempCart = [...this.state.cart];
+        const selectedProduct = tempCart.find(item => item.id === id);
+
+        const index = tempCart.indexOf(selectedProduct);
+        const product = tempCart[index];
+        product.count = product.count + 1;
+
+        this.setState(() => {
+            return {cart: [...tempCart]};
+        })
+    }
+
     decrementItem = id => {
         let tempCart = [...this.state.cart];
         const selectedProduct = tempCart.find(item => item.id === id);
@@ -143,26 +156,6 @@ class ProductProvider extends Component {
     }
 
     restoreCart = () => {
-        // let array = [...this.state.shirts];
-        // if(array) {
-        //     array.forEach(element => {
-        //         //console.log(element);
-        //         console.log("here one");
-        //         console.log(typeof(element));
-        //         if(element.inCart) {
-        //             console.log("here two");
-        //             console.log("inCart is set for element: ");
-        //             console.log(element);
-        //             let tempProduct = [...this.state.shirts];
-        //             const index = tempProduct.indexOf(element);
-        //             const product = tempProduct[index];
-        //             if(product) this.updateCartState(product, tempProduct);
-        //         }
-        //         else {
-        //             console.log("oops")
-        //         }
-        //     });
-        // }
         var itemId = localStorage.getItem('itemID');
         if(itemId) {
             //console.log(typeof(itemId));
@@ -184,27 +177,6 @@ class ProductProvider extends Component {
             });
             toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
         }
-        // if(itemId) {
-        //     console.log(itemId);
-        //     let tempProduct = [...this.state.shirts];
-        //     console.log("tempproducts: " + tempProduct);
-        //     const index = tempProduct.indexOf(this.getItem(parseInt(itemId)));
-        //     console.log(index);
-        //     const product = tempProduct[index];
-        //     console.log("Product from localstorage: "+ product);
-        //     if(product) {
-        //         product.inCart = true;
-        //         product.count++;
-        //         product.total = product.price * product.count;
-    
-        //         this.setState(() => {
-        //             return {shirts: tempProduct, cart: [...this.state.cart, product]};
-        //         }, () => {
-        //             toast.success("Cart restored from previous session", { position: toast.POSITION.BOTTOM_RIGHT })
-        //             //console.log(this.state);
-        //         })
-        //     }
-        // }
     }
 
     addToCart = (id, size) => {
@@ -242,6 +214,7 @@ class ProductProvider extends Component {
                     clearCart: this.clearCart,
                     removeItem: this.removeItem,
                     decrementItem: this.decrementItem,
+                    incrementItem: this.incrementItem
                 }
             }> 
             {
