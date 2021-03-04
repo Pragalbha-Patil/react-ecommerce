@@ -3,6 +3,21 @@ import {ProductConsumer} from '../Context';
 import Product from './Product';
 
 export default class Products extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    handleChange = e => {
+        const { name, value } = e.target;
+    
+        this.setState({
+            [name]: value
+        });
+
+        //console.log("Current state");
+        console.log(this.state);
+    };
 
     render() {
         return (
@@ -11,66 +26,79 @@ export default class Products extends Component {
                     <div id="sidebar">
                         <h4 style={{color: "var(--pink)", textAlign: "center"}}>Filters</h4>
                         <hr />
-                        <div className="filters">
-                            <h6>Style</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="style"/>
-                                <label class="form-check-label" >
-                                    Formals
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="style"/>
-                                <label class="form-check-label" >
-                                    Casuals
-                                </label>
-                            </div>
-                        </div>
-                        <hr />
-                        <div className="filters">
-                            <h6>Price range</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="price"/>
-                                <label class="form-check-label" >
-                                    500-1000
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="price"/>
-                                <label class="form-check-label" >
-                                    1000-2000
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="price"/>
-                                <label class="form-check-label" >
-                                    2000-3000
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="price"/>
-                                <label class="form-check-label" >
-                                    3000 & above
-                                </label>
-                            </div>
-                        </div>
-                        <hr />
-                        <div className="filters">
-                            <h6>Brand</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="brand"/>
-                                <label class="form-check-label" >
-                                    MensFormal
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="brand"/>
-                                <label class="form-check-label" >
-                                    MensCasual
-                                </label>
-                            </div>
-                            {/* <hr /> */}
-                        </div>
+                        <ProductConsumer>
+                            {
+                                (value) => {
+                                    return (
+                                        <div>
+                                            <div className="filters">
+                                                    <h6>Style</h6>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="style" value="formal" onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            Formals
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="style" value="casual"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            Casuals
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div className="filters">
+                                                    <h6>Price range</h6>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="price" value="500-1000"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            500-1000
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="price" value="1000-2000"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            1000-2000
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="price" value="2000-3000"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            2000-3000
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="price" value="3000-above"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            3000 & above
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div className="filters">
+                                                    <h6>Brand</h6>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="brand" value="MensFormal"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            MensFormal
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="brand" value="MensCasual"  onChange={this.handleChange} />
+                                                        <label class="form-check-label" >
+                                                            MensCasual
+                                                        </label>
+                                                    </div>
+                                                    {/* <hr />
+                                                    <button className="cartBtn" onClick={() => {alert("Apply filters, feature not implemented yet.")}}>
+                                                        Apply
+                                                    </button> */}
+                                                </div>
+                                        </div>
+                                    );
+                                }
+                            }
+                        </ProductConsumer>
                     </div>
                     <div id="content">
                         <div className="row py-5">

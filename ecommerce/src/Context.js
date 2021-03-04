@@ -4,6 +4,7 @@ import React, {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Fuse from "fuse.js";
+import styled from 'styled-components';
 
 var cartItemsID = "";
 
@@ -182,6 +183,13 @@ class ProductProvider extends Component {
         }
     }
 
+    handleFilters = (style, price, brand) => {
+        console.log("Filters on");
+        console.log("Style: "+style);
+        console.log("Price: "+price);
+        console.log("Brand: "+brand);
+    }
+
     addToWishlist = (id) => {
         let tempProduct = [...this.state.shirts];
         const index = tempProduct.indexOf(this.getItem(id));
@@ -268,6 +276,7 @@ class ProductProvider extends Component {
                     incrementItem: this.incrementItem,
                     searchProducts: this.searchProducts,
                     addToWishlist: this.addToWishlist,
+                    handleFilters: this.handleFilters,
                 }
             }> 
             {
