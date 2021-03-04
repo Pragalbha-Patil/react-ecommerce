@@ -89,10 +89,10 @@ export default class Products extends Component {
                                                             MensCasual
                                                         </label>
                                                     </div>
-                                                    {/* <hr />
+                                                    <hr />
                                                     <button className="cartBtn" onClick={() => {alert("Apply filters, feature not implemented yet.")}}>
                                                         Apply
-                                                    </button> */}
+                                                    </button>
                                                 </div>
                                         </div>
                                     );
