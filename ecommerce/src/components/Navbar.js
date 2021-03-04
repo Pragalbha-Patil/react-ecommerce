@@ -116,6 +116,7 @@ export default class Navbar extends Component {
                                                 <table className="table">
                                                     <thead>
                                                         <tr>
+                                                            <th scope="col">Image</th>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Brand</th>
                                                             <th scope="col">Price</th>
@@ -129,10 +130,13 @@ export default class Navbar extends Component {
                                                             //console.log(element.title);
                                                             return (
                                                                     <tr key={element.id}>
-                                                                        <td className="mt-2">{element.title}</td>
-                                                                        <td className="mt-10 text-muted">{element.brand}</td>
-                                                                        <td className="mt-2">Rs.{element.price}</td>
-                                                                        <td className="text-center">
+                                                                        <td className="p-2">
+                                                                            <img className="img-fluid" src={"https://www.prolicing.tech/"+element.img[0]} width="100px" height="100px"></img>
+                                                                        </td>
+                                                                        <td className="my-10">{element.title}</td>
+                                                                        <td className="my-10 text-muted">{element.brand}</td>
+                                                                        <td className="my-10">Rs.{element.price}</td>
+                                                                        <td className="text-center my-10">
                                                                             <span>
                                                                                 <ProductConsumer>
                                                                                     {
