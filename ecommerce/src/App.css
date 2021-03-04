@@ -442,3 +442,16 @@ a:hover {
     background-image: none;
     border: 1px solid transparent;
 }
+
+.incrementBtn, .decrementBtn {
+    color: var(--pink);
+    /* outline: var(--pink) auto 5px;  */
+    transition: all 0.1s linear;
+    border: solid 1px var(--pink);
+    border-radius: 50%;
+}
+
+.cartModal {
+    width: 50vw;    /* Occupy the 90% of the screen width */
+    max-width: 90vw;
+}
