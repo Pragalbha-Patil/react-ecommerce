@@ -40,6 +40,13 @@ export default class Navbar extends Component {
         }
     }
 
+    removeElementFromCart(element, id) {
+        element.inCart = false;
+        console.log("Element after inCart false: ");
+        console.log(element);
+        this.forceUpdate();
+    }
+
     render() {
         return (
             <div>
@@ -124,10 +131,16 @@ export default class Navbar extends Component {
                             <ProductConsumer>
                                 {
                                     (value) => {
-                                        console.log("CART from Navbar");
-                                        console.log(value.cart);
+                                        // console.log("CART from Navbar");
+                                        // console.log(value.cart);
                                         var array = value.cart;
                                         let totalPrice = 0;
+                                        let length = array.length
+                                        if(length === 0) {
+                                            return (
+                                                <p className="text-center">Your cart is currently empty!</p>
+                                            );
+                                        }
                                         return (
                                             <div>
                                                 <table className="table">
@@ -143,7 +156,7 @@ export default class Navbar extends Component {
                                                     <tbody>
                                                     {
                                                         array.map(element => {
-                                                            console.log(element.title);
+                                                            //console.log(element.title);
                                                             return (
                                                                     <tr key={element.id}>
                                                                         <td className="mt-2">{element.title}</td>
@@ -163,7 +176,18 @@ export default class Navbar extends Component {
                                                                             </span>
                                                                         </td>
                                                                         <td>
-                                                                            <i class="fa fa-trash" onClick={() => {window.confirm("Do you want to remove this item?")}}></i>
+                                                                            <i class="fa fa-trash" onClick={() => {
+                                                                                if(window.confirm("Are you sure to delete this item from your cart?")) {
+                                                                                    // <ProductConsumer>
+                                                                                    //     {
+                                                                                    //         (value) => {
+                                                                                    //             console.log("Removing: "+element.id);
+                                                                                    //             value.removeElementFromCart(element.id);
+                                                                                    //         }
+                                                                                    //     }
+                                                                                    // </ProductConsumer>
+                                                                                }
+                                                                            }}></i>
                                                                         </td>
                                                                     </tr>
                                                             );
@@ -174,7 +198,7 @@ export default class Navbar extends Component {
                                                 <hr />
                                                 {
                                                     array.map(element => {
-                                                        console.log(element.title);
+                                                        //console.log(element.title);
                                                         totalPrice += element.price * element.count
                                                         
                                                     })
@@ -187,6 +211,19 @@ export default class Navbar extends Component {
                             </ProductConsumer>
                         </Modal.Body>
                         <Modal.Footer>
+                            <ProductConsumer>
+                                {
+                                    (value) => {
+                                        const length = value.cart.length;
+                                        console.log(value);
+                                        return (
+                                            <Button variant="danger" onClick={() => value.clearCart()} disabled={length ? false : true}>
+                                                Clear cart
+                                            </Button>
+                                        );
+                                    }
+                                }
+                            </ProductConsumer>
                             <Button variant="secondary" onClick={this.closeModal}>
                             Close
                             </Button>

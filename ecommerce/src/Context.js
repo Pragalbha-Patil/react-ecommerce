@@ -74,19 +74,42 @@ class ProductProvider extends Component {
         })
     }
 
+    clearCart = () => {
+        this.setState(() => {
+            return {cart: []}
+        })
+    }
+
+    removeElementFromCart(e) {
+        console.log("in remove cart");
+        console.log(e);
+        var array = [...this.state.cart]; // make a separate copy of the array
+        const index = array.indexOf(this.getItem(e));
+        if (index !== -1) {
+          array.splice(index, 1);
+          this.setState(() => {
+            return {cart: array};
+          });
+          console.log("element removed");
+          console.log(this.state.cart);
+        }
+    }
+
     getItem = (id) => {
         const product = this.state.shirts.find(item => item.id === id);
         return product
     }
 
     updateCartState = (product, tempProduct) => {
+        console.log("Update cart called");
         product.inCart = true;
         product.count++;
         product.total = product.price * product.count;
             
         this.setState(() => {
             return {shirts: tempProduct, cart: [...this.state.cart, product]};
-        }, () => {                
+        }, () => {
+            console.log("Cart is updated");                
             console.log(this.state);
         })
     }
@@ -187,7 +210,8 @@ class ProductProvider extends Component {
                 {
                     ...this.state,
                     handleDetail: this.handleDetail,
-                    addToCart: this.addToCart
+                    addToCart: this.addToCart,
+                    clearCart: this.clearCart,
                 }
             }> 
             {
