@@ -3,6 +3,7 @@ import React, {
 } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Fuse from "fuse.js";
 
 var cartItemsID = "";
 
@@ -28,6 +29,7 @@ class ProductProvider extends Component {
     }
 
     getShirtsFromServer(shouldRestoreCart) {
+        console.log("Fetching data from server...");
         fetch('https://www.prolicing.tech/get-shirts-data')
         .then((response) => response.json())
         .then(shirtsData => {
@@ -205,8 +207,41 @@ class ProductProvider extends Component {
     }
 
     searchProducts = (query) => {
-        console.log("Query: " + query);
+        const shirtsCopy = [...this.state.shirts];
+        // this.setState(() => {
+        //     return {shirts: shirtsCopy};
+        // })
         
+        if(!query.length) {
+            this.setState(() => {
+                return {shirts: shirtsCopy};
+            })
+        }
+        else {
+            console.log("Query: " + query);
+            const shirts = [...this.state.shirts];
+            const fuse = new Fuse(shirts, {
+                keys: ["title", "brand"],
+            });
+            const result = fuse.search(query);
+            const matches = [];
+            if (!result.length) {
+                this.setState(() => {
+                    return {shirts: []};
+                }, () => {
+                    setTimeout(() => this.getShirtsFromServer(), 1500);
+                })
+            } else {
+            result.forEach(({item}) => {
+                matches.push(item);
+                //console.log(matches);
+            });
+                console.log(matches);
+                this.setState(() => {
+                    return {shirts: matches};
+                })
+            }
+        }
     }
 
     render() {
