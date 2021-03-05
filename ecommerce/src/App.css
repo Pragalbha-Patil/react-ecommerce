@@ -37,6 +37,7 @@ body {
 
 .filters {
     padding-left: 5%;
+    padding-right: 10px;
 }
 
 #content {
@@ -93,6 +94,13 @@ a:hover {
 @media screen and (max-width: 768px) {
     #sidebar {
         padding-top: 20%;
+        width: 15%;
+    }
+    #content {
+        width: 85%;
+    }
+    .brand-text {
+        display: none;
     }
 }
 
@@ -364,3 +372,4 @@ a:hover {
     width: 50vw;    /* Occupy the 50% of the screen width */
     max-width: 90vw;
 }
+
