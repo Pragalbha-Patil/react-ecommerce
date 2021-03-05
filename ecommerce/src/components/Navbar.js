@@ -7,15 +7,21 @@ import {ProductConsumer, removeItem} from '../Context';
 export default class Navbar extends Component {
 
     state = {
-        isOpen: false,
-        cartCount: 0,
+        isCartOpen: false,
+        isWishlistOpen: false,
     };
 
-    openModal = () => {
+    openCartModal = () => {
         // at last open the modal
-        this.setState({ isOpen: true });
+        this.setState({ isCartOpen: true });
     }
-    closeModal = () => this.setState({ isOpen: false });
+    closeCartModal = () => this.setState({ isCartOpen: false });
+
+    openWishlistModal = () => {
+        // at last open the modal
+        this.setState({ isWishlistOpen: true });
+    }
+    closeWishlistModal = () => this.setState({ isWishlistOpen: false });
 
     render() {
         return (
@@ -72,10 +78,22 @@ export default class Navbar extends Component {
                     </div>
                     <div className="header-profile">
                         {/* <a className="header-profile-links ripple-grow" onClick={() => {alert("This will open wishlist, feature not implemented yet.")}}>
-                            <i className="fa fa-bookmark"></i>
-                        </a> */}
-                        <pre>   </pre>
-                        <a className="header-profile-links ripple-grow" onClick={this.openModal}>
+                            <ProductConsumer>
+                                {
+                                    (value) => {
+                                        let count = value.wishlist.length;
+                                        return (
+                                                <span className="ripple-waves ripple ripple-dark">
+                                                    <i className="fa fa-bookmark"></i>
+                                                    <p className="p-2 mt-3">{count}</p>
+                                                </span>
+                                        );
+                                    }
+                                }
+                            </ProductConsumer>
+                        </a>
+                        <pre>   </pre> */}
+                        <a className="header-profile-links ripple-grow" onClick={this.openCartModal}>
                             <ProductConsumer>
                                 {
                                     (value) => {
@@ -106,7 +124,7 @@ export default class Navbar extends Component {
                         </a> */}
                     </div>
                 </header>
-                    <Modal show={this.state.isOpen} onHide={this.closeModal} dialogClassName="cartModal">
+                    <Modal show={this.state.isCartOpen} onHide={this.closeCartModal} dialogClassName="cartModal">
                         <Modal.Header closeButton>
                             <Modal.Title>Your Cart</Modal.Title>
                         </Modal.Header>
@@ -220,7 +238,7 @@ export default class Navbar extends Component {
                                     }
                                 }
                             </ProductConsumer>
-                            <Button variant="secondary" onClick={this.closeModal}>
+                            <Button variant="secondary" onClick={this.closeCartModal}>
                             Close
                             </Button>
                         </Modal.Footer>

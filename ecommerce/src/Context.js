@@ -183,11 +183,10 @@ class ProductProvider extends Component {
         }
     }
 
-    handleFilters = (style, price, brand) => {
+    handleFilters = (e) => {
+        // e.preventDefault();
         console.log("Filters on");
-        console.log("Style: "+style);
-        console.log("Price: "+price);
-        console.log("Brand: "+brand);
+        console.log(e);
     }
 
     addToWishlist = (id) => {
@@ -196,6 +195,12 @@ class ProductProvider extends Component {
         const product = tempProduct[index];
         if(product) {
             product.wishlist = true;
+            this.setState(() => {
+                return {wishlist: [...this.state.wishlist, product]};
+            }, () => {
+                console.log("wishlist after update");
+                console.log(this.state.wishlist);
+            })
             toast.success(product.title + " added to wishlist!", { position: toast.POSITION.BOTTOM_RIGHT })
         }
     }
@@ -248,7 +253,10 @@ class ProductProvider extends Component {
                 this.setState(() => {
                     return {shirts: []};
                 }, () => {
-                    setTimeout(() => this.getShirtsFromServer(), 1500);
+                    setTimeout(() => {
+                        toast.info("No result found for your query, you can browse similar products here", { position: toast.POSITION.BOTTOM_RIGHT })
+                        this.getShirtsFromServer();
+                    }, 1500);
                 })
             } else {
             result.forEach(({item}) => {

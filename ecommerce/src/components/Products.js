@@ -30,17 +30,17 @@ export default class Products extends Component {
                             {
                                 (value) => {
                                     return (
-                                        <div>
+                                        <form id="filtersForm" onSubmit={(e) => {e.preventDefault(); value.handleFilters(this.state)}}>
                                             <div className="filters">
                                                     <h6>Style</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="style" value="formal" onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="style" value="formal" onChange={this.handleChange} required />
                                                         <label class="form-check-label" >
                                                             Formals
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="style" value="casual"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="style" value="casual"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             Casuals
                                                         </label>
@@ -50,25 +50,25 @@ export default class Products extends Component {
                                                 <div className="filters">
                                                     <h6>Price range</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="price" value="500-1000"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="price" value="500-1000"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             500-1000
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="price" value="1000-2000"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="price" value="1000-2000"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             1000-2000
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="price" value="2000-3000"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="price" value="2000-3000"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             2000-3000
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="price" value="3000-above"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="price" value="3000-above"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             3000 & above
                                                         </label>
@@ -78,23 +78,23 @@ export default class Products extends Component {
                                                 <div className="filters">
                                                     <h6>Brand</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="brand" value="MensFormal"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="brand" value="MensFormal"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             MensFormal
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="brand" value="MensCasual"  onChange={this.handleChange} />
+                                                        <input class="form-check-input" type="radio" name="brand" value="MensCasual"  onChange={this.handleChange} required  />
                                                         <label class="form-check-label" >
                                                             MensCasual
                                                         </label>
                                                     </div>
                                                     <hr />
-                                                    <button className="cartBtn" onClick={() => {alert("Apply filters, feature not implemented yet.")}}>
+                                                    <button type="submit" className="cartBtn">
                                                         Apply
                                                     </button>
                                                 </div>
-                                        </div>
+                                        </form>
                                     );
                                 }
                             }
