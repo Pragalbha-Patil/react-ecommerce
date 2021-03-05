@@ -271,7 +271,7 @@ class ProductProvider extends Component {
             this.setState(() => {
                 return {shirts: []};
             }, () => {
-                toast.success("No match found!", { position: toast.POSITION.BOTTOM_RIGHT })
+                toast.error("No match found, clear filters to view all products", { position: toast.POSITION.BOTTOM_RIGHT })
             });
         }
     }
