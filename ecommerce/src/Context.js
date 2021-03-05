@@ -187,6 +187,104 @@ class ProductProvider extends Component {
         // e.preventDefault();
         console.log("Filters on");
         console.log(e);
+        const brand = e.brand;
+        var priceRange = e.price;
+        var style = e.style;
+        const shirts = [...this.state.shirts];
+        
+        // brand filter start
+        const fuse = new Fuse(shirts, {
+            keys: ["brand"],
+        });
+        const result = fuse.search(brand);
+        const matches = [];
+        if (!result.length) {
+            //
+        } else {
+        result.forEach(({item}) => {
+            matches.push(item);
+            //console.log(matches);
+        });
+            // console.log(matches);
+            // this.setState(() => {
+            //     return {shirts: matches};
+            // })
+        }
+        // brand filter ends
+
+        // style filter starts
+        const fuse1 = new Fuse(shirts, {
+            keys: ["brand"],
+        });
+        
+        if(style === "formal") style = "MensFormal";
+        else style = "MensCasual";
+        
+        const result1 = fuse1.search(style);
+        const matches1 = [];
+        if (!result1.length) {
+            //
+        } else {
+        result1.forEach(({item}) => {
+            matches1.push(item);
+            //console.log(matches);
+        });
+            // console.log(matches1);
+            // this.setState(() => {
+            //     return {shirts: matches1};
+            // })
+        }
+        // style filter ends
+
+        // price range filter starts
+        let price = priceRange.split("-");
+        let min = parseInt(price[0]);
+        let max = price[1];
+        if(max === "above") max = 99999;
+        else max = parseInt(max);
+        // console.log(min);console.log(max);
+
+        // console.log("Price filter");
+        // console.log(price);
+        let shirtsFiltered = [];
+        shirts.forEach(element => {
+            if(element.price >= min && element.price <= max) {
+                shirtsFiltered.push(element);
+            }
+        });
+        console.log("After filters");
+        // console.log(matches);
+        // console.log(matches1);
+        // console.log(shirtsFiltered);
+
+        var brandAndStyle = this.getMatch(matches, matches1);
+        var brandStyleAndPrice = this.getMatch(brandAndStyle, shirtsFiltered);
+        console.log(brandStyleAndPrice);
+        if(brandStyleAndPrice.length) {
+            this.setState(() => {
+                return {shirts: brandStyleAndPrice};
+            }, () => {
+                toast.success("Filters applied!", { position: toast.POSITION.BOTTOM_RIGHT })
+            });
+        }
+        else {
+            this.setState(() => {
+                return {shirts: []};
+            }, () => {
+                toast.success("No match found!", { position: toast.POSITION.BOTTOM_RIGHT })
+            });
+        }
+    }
+
+    getMatch(a, b) {
+        var matches = [];
+    
+        for ( var i = 0; i < a.length; i++ ) {
+            for ( var e = 0; e < b.length; e++ ) {
+                if ( a[i] === b[e] ) matches.push( a[i] );
+            }
+        }
+        return matches;
     }
 
     addToWishlist = (id) => {
@@ -255,7 +353,7 @@ class ProductProvider extends Component {
                 }, () => {
                     setTimeout(() => {
                         toast.info("No result found for your query, you can browse similar products here", { position: toast.POSITION.BOTTOM_RIGHT })
-                        this.getShirtsFromServer();
+                        this.getShirtsFromServer(false);
                     }, 1500);
                 })
             } else {
@@ -285,6 +383,7 @@ class ProductProvider extends Component {
                     searchProducts: this.searchProducts,
                     addToWishlist: this.addToWishlist,
                     handleFilters: this.handleFilters,
+                    getShirtsFromServer: this.getShirtsFromServer,
                 }
             }> 
             {

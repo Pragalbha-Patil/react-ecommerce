@@ -30,6 +30,7 @@ export default class Products extends Component {
                             {
                                 (value) => {
                                     return (
+                                        <div>
                                         <form id="filtersForm" onSubmit={(e) => {e.preventDefault(); value.handleFilters(this.state)}}>
                                             <div className="filters">
                                                     <h6>Style</h6>
@@ -90,11 +91,19 @@ export default class Products extends Component {
                                                         </label>
                                                     </div>
                                                     <hr />
-                                                    <button type="submit" className="cartBtn">
-                                                        Apply
-                                                    </button>
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <button type="submit" className="cartBtn">
+                                                                Apply
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                         </form>
+                                            <button type="button" className="cartBtn m-2" onClick={() => window.location.reload()}>
+                                                Clear filters
+                                            </button>
+                                        </div>
                                     );
                                 }
                             }
