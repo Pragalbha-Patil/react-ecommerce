@@ -252,7 +252,7 @@ class ProductProvider extends Component {
                 shirtsFiltered.push(element);
             }
         });
-        console.log("After filters");
+        // console.log("After filters");
         // console.log(matches);
         // console.log(matches1);
         // console.log(shirtsFiltered);
@@ -289,17 +289,31 @@ class ProductProvider extends Component {
 
     addToWishlist = (id) => {
         let tempProduct = [...this.state.shirts];
+        let tempWishlist = [...this.state.wishlist];
         const index = tempProduct.indexOf(this.getItem(id));
         const product = tempProduct[index];
         if(product) {
-            product.wishlist = true;
-            this.setState(() => {
-                return {wishlist: [...this.state.wishlist, product]};
-            }, () => {
-                console.log("wishlist after update");
-                console.log(this.state.wishlist);
-            })
-            toast.success(product.title + " added to wishlist!", { position: toast.POSITION.BOTTOM_RIGHT })
+            product.wishlist = product.wishlist ? false : true;
+
+            if(product.wishlist) {
+                this.setState(() => {
+                    return {wishlist: [...this.state.wishlist, product]};
+                }, () => {
+                    console.log("wishlist after update");
+                    console.log(this.state.wishlist);
+                })
+                toast.success(product.title + " added to wishlist!", { position: toast.POSITION.BOTTOM_RIGHT })
+            }
+            else {
+                tempWishlist = tempWishlist.filter(item => item.id !== id);
+                this.setState(() => {
+                    return {wishlist: [tempWishlist]};
+                }, () => {
+                    console.log("wishlist after update");
+                    console.log(this.state.wishlist);
+                })
+                toast.info(product.title + " removed from wishlist!", { position: toast.POSITION.BOTTOM_RIGHT })
+            }
         }
     }
 

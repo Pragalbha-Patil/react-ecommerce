@@ -59,7 +59,7 @@ export default class ProductDetails extends Component {
             <ProductConsumer>
                 {
                     value => {
-                        const {id, title, price, brand, img, inCart} = value.detailProduct;
+                        const {id, title, price, brand, img, inCart, wishlist} = value.detailProduct;
                         //console.log(img);
                         let offer = Math.floor(Math.random() * 10) + 50;
                         let discount = Math.floor((offer * price) / 100);
@@ -149,13 +149,18 @@ export default class ProductDetails extends Component {
                                                 </button>
                                             </div>
                                             <div className="col-md-6">
-                                                <Link to="/">
-                                                    <button className="btn btn-outline-dark mt-4">
-                                                        <i className="fa fa-arrow-left" /> Go back
-                                                    </button>
-                                                </Link>
+                                                <button className="cartBtn mt-4" onClick={() => value.addToWishlist(id)} style={{backgroundColor: (wishlist) ? 'var(--almost-black)' : "var(--pink)", cursor: (wishlist) ? 'auto' : "pointer"}}>
+                                                    <span>
+                                                        <i className="fa fa-heart" /> {(wishlist) ? 'Wishlisted' : "Add to Wishlist"}
+                                                    </span>
+                                                </button>
                                             </div>
                                         </div>
+                                        <Link to="/">
+                                            <button className="btn btn-outline-dark mt-4">
+                                                <i className="fa fa-arrow-left" /> Go back
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

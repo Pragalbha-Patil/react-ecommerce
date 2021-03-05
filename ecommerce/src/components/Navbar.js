@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
-import {ProductConsumer, removeItem} from '../Context';
+import {ProductConsumer} from '../Context';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import styled from 'styled-components';
 
 export default class Navbar extends Component {
@@ -77,7 +79,7 @@ export default class Navbar extends Component {
                         </div>
                     </div>
                     <div className="header-profile">
-                        {/* <a className="header-profile-links ripple-grow" onClick={() => {alert("This will open wishlist, feature not implemented yet.")}}>
+                        <a className="header-profile-links ripple-grow" onClick={() => {toast.info("You can modify wishlist from products page")}}>
                             <ProductConsumer>
                                 {
                                     (value) => {
@@ -92,7 +94,6 @@ export default class Navbar extends Component {
                                 }
                             </ProductConsumer>
                         </a>
-                        <pre>   </pre> */}
                         <a className="header-profile-links ripple-grow" onClick={this.openCartModal}>
                             <ProductConsumer>
                                 {
