@@ -410,6 +410,9 @@ class ProductProvider extends Component {
 }
 
 const ProductConsumer = ProductContext.Consumer;
+// console.log("logging both consumer and provider below");
+// console.log(ProductProvider);
+// console.log(ProductConsumer);
 
 export {
     ProductProvider,

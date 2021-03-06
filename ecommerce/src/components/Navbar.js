@@ -110,14 +110,14 @@ export default class Navbar extends Component {
                                 }
                             </ProductConsumer>
                         </a>
-                        {/* <a className="hader-profile-links ripple-grow">
+                        {/* <a className="header-profile-links ripple-grow">
                             <span className="ripple-waves ripple ripple-dark">
                                 <svg className="ripple-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M10,12A2,2 0 0,0 8,14A2,2 0 0,0 10,16A2,2 0 0,0 12,14A2,2 0 0,0 10,12M6,8A2,2 0 0,0 4,10A2,2 0 0,0 6,12A2,2 0 0,0 8,10A2,2 0 0,0 6,8M6,16A2,2 0 0,0 4,18A2,2 0 0,0 6,20A2,2 0 0,0 8,18A2,2 0 0,0 6,16M18,8A2,2 0 0,0 20,6A2,2 0 0,0 18,4A2,2 0 0,0 16,6A2,2 0 0,0 18,8M14,16A2,2 0 0,0 12,18A2,2 0 0,0 14,20A2,2 0 0,0 16,18A2,2 0 0,0 14,16M18,12A2,2 0 0,0 16,14A2,2 0 0,0 18,16A2,2 0 0,0 20,14A2,2 0 0,0 18,12M14,8A2,2 0 0,0 12,10A2,2 0 0,0 14,12A2,2 0 0,0 16,10A2,2 0 0,0 14,8M10,4A2,2 0 0,0 8,6A2,2 0 0,0 10,8A2,2 0 0,0 12,6A2,2 0 0,0 10,4Z"></path>
                                 </svg>
                             </span>
                         </a> */}
-                        {/* <a className="hader-profile-links">
+                        {/* <a className="header-profile-links">
                             <svg className="avatar" width="35" height="35" xmlns="http://www.w3.org/2000/svg"
                                 preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
                                 <rect width="100%" height="100%" fill="#495057"></rect>
@@ -125,7 +125,7 @@ export default class Navbar extends Component {
                         </a> */}
                     </div>
                 </header>
-                    <Modal show={this.state.isCartOpen} onHide={this.closeCartModal} dialogClassName="cartModal">
+                    <Modal show={this.state.isCartOpen} onHide={this.closeCartModal} dialogClassName="cartModal modal-lg">
                         <Modal.Header closeButton>
                             <Modal.Title>Your Cart</Modal.Title>
                         </Modal.Header>
@@ -144,7 +144,7 @@ export default class Navbar extends Component {
                                             );
                                         }
                                         return (
-                                            <div>
+                                            <table className="table-responsive">
                                                 <table className="table">
                                                     <thead>
                                                         <tr>
@@ -219,7 +219,7 @@ export default class Navbar extends Component {
                                                     })
                                                 }
                                                 <h6 className="float-right">Total Price: Rs.{totalPrice}</h6>
-                                            </div>
+                                            </table>
                                         );
                                     }
                                 }
