@@ -12,7 +12,7 @@ const fetchShirt = shirts => ({
 export const fetchShirts =  () => {
     return async dispatch => {
         try {
-            let shirts = await axios.get('https://www.prolicing.tech/get-shirts-data')
+            let shirts = await axios.get('URL')
             dispatch(fetchShirt(shirts.data))
         }
         catch(e){

@@ -41,7 +41,7 @@ export default class ProductDetails extends Component {
 
     addPhotosToArray = (img) => {
         images = [];
-        let url = "https://www.prolicing.tech/";
+        let url = process.env.PUBLIC_URL +"/";
         img = url + img;
         images.push(img);
         console.log("images: "+images);
@@ -83,7 +83,7 @@ export default class ProductDetails extends Component {
                                     {/* shirt img */}
                                     <div className="col-10 mx-auto col-md-6 my-3">
                                         {/* {renderImages()} */}
-                                        <img src={"https://www.prolicing.tech/"+img[0]} className="img-fluid" alt="shirt" onClick={() => this.setState({ isOpen: true })} /> 
+                                        <img src={process.env.PUBLIC_URL +"/"+img[0]} className="img-fluid" alt="shirt" onClick={() => this.setState({ isOpen: true })} /> 
                                         {isOpen && (
                                             <Lightbox
                                                 mainSrc={images[photoIndex]}

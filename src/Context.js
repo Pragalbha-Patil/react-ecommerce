@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Fuse from "fuse.js";
 import styled from 'styled-components';
+var data = require('./data/shirts.json');
 
 var cartItemsID = "";
 
@@ -22,17 +23,24 @@ class ProductProvider extends Component {
     }
 
     componentDidMount() {
-        // fetch('https://www.prolicing.tech/get-shirts-data')
-        // .then((response) => response.json())
-        // .then(shirtsData => {
-        //     this.setState({ shirts: shirtsData });
-        // });
-        this.getShirtsFromServer(true);
+        let tempProducts = [];
+        data.forEach(element => {
+            const singleItem = {
+                ...element
+            };
+            tempProducts = [...tempProducts, singleItem];
+            this.shuffle(tempProducts); // shuffles the array to avoid cliched views
+            this.setState(() => {
+                return {
+                    shirts: tempProducts
+                };
+            });
+        });
     }
 
     getShirtsFromServer(shouldRestoreCart) {
         console.log("Fetching data from server...");
-        fetch('https://www.prolicing.tech/get-shirts-data')
+        fetch('URL')
         .then((response) => response.json())
         .then(shirtsData => {
             let tempProducts = [];

@@ -163,7 +163,7 @@ export default class Navbar extends Component {
                                                             return (
                                                                     <tr key={element.id}>
                                                                         <td className="p-2">
-                                                                            <img className="img-fluid" src={"https://www.prolicing.tech/"+element.img[0]} width="100px" height="100px"></img>
+                                                                            <img className="img-fluid" src={process.env.PUBLIC_URL +"/"+element.img[0]} width="100px" height="100px"></img>
                                                                         </td>
                                                                         <td className="my-10">{element.title}</td>
                                                                         <td className="my-10 text-muted">{element.brand}</td>
