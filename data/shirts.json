@@ -1,0 +1,225 @@
+[
+    {
+        "id": 1,
+        "title": "Casual Red shirt",
+        "img": ["shirts/casual/red/1.jpg"],
+        "price": 800,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 2,
+        "title": "Casual Black shirt",
+        "img": [
+            "shirts/casual/black/1.jpg",
+            "shirts/casual/black/2.jpg"
+        ],
+        "price": 700,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 3,
+        "title": "Casual Blue shirt",
+        "img": ["shirts/casual/blue/1.jpg"],
+        "price": 600,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 4,
+        "title": "Casual Brown shirt",
+        "img": ["shirts/casual/brown/1.jpg"],
+        "price": 900,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 5,
+        "title": "Casual Green shirt",
+        "img": ["shirts/casual/green/1.jpg"],
+        "price": 1800,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 6,
+        "title": "Casual Grey shirt",
+        "img": ["shirts/casual/grey/1.jpg"],
+        "price": 1000,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 7,
+        "title": "Casual Light blue shirt",
+        "img": ["shirts/casual/light_blue/1.jpg"],
+        "price": 500,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 8,
+        "title": "Casual Maroon shirt",
+        "img": ["shirts/casual/maroon/1.jpg"],
+        "price": 750,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 9,
+        "title": "Casual Pink shirt",
+        "img": ["shirts/casual/pink/1.jpeg"],
+        "price": 1250,
+        "brand": "MensCasual",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 10,
+        "title": "Formal Red shirt",
+        "img": ["shirts/formal/red/red_formal_shirt.jpg"],
+        "price": 2300,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 11,
+        "title": "Formal Black shirt",
+        "img": [
+            "shirts/formal/black/plain_black.jpeg",
+            "shirts/formal/black/plain_black_2.jpg",
+            "shirts/formal/black/plain_black_3.jpg"
+        ],
+        "price": 3450,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 12,
+        "title": "Formal Blue shirt",
+        "img": [
+            "shirts/formal/blue/blue_1.jpg",
+            "shirts/formal/blue/blue_2.jpg"
+        ],
+        "price": 2575,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 13,
+        "title": "Formal Brown shirt",
+        "img": [
+            "shirts/formal/brown/plain_brown_shirt.jpg",
+            "shirts/formal/brown/plain_brown_2.jpg"
+        ],
+        "price": 2575,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 14,
+        "title": "Formal Green shirt",
+        "img": [
+            "shirts/formal/green/dark_green_shirt.jpeg"
+        ],
+        "price": 3100,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 15,
+        "title": "Formal Grey shirt",
+        "img": [
+            "shirts/formal/grey/plain_grey.jpg"
+        ],
+        "price": 3415,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 16,
+        "title": "Formal Light blue shirt",
+        "img": [
+            "shirts/formal/light_blue/light_blue.jpg",
+            "shirts/formal/light_blue/light_blue_2.jpg",
+            "shirts/formal/light_blue/light_blue_3.jpg"
+        ],
+        "price": 3265,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 17,
+        "title": "Formal Maroon shirt",
+        "img": [
+            "shirts/formal/maroon/maroon_formal_shirt.jpg"
+        ],
+        "price": 4000,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    },
+    {
+        "id": 18,
+        "title": "Formal Pink shirt",
+        "img": [
+            "shirts/formal/pink/pink_formal_1.jpg"
+        ],
+        "price": 3211,
+        "brand": "MensFormal",
+        "inCart": false,
+        "total": 0,
+        "count": 0,
+        "wishlist": false
+    }
+]
